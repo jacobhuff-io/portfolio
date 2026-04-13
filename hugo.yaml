@@ -1,10 +1,12 @@
 baseURL: https://jacobhuff.io/
 locale: en-us
 title: Jacob Huff
+theme: ["PaperMod"]
 
 module:
   imports:
   - path: github.com/adityatelange/hugo-PaperMod
 
-theme: ["PaperMod"]
-
+caches:
+  images:
+    dir: :cacheDir/images
