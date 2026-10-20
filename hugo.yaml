@@ -1,7 +1,6 @@
 baseURL: https://jacobhuff.io/
 locale: en-us
 title: Jacob Huff
-theme: ["PaperMod"]
 
 module:
   imports:
