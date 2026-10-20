@@ -9,3 +9,24 @@ module:
 caches:
   images:
     dir: :cacheDir/images
+
+menu:
+  main:
+  - name: Projects
+    pageRef: /projects
+    weight: 10
+  - name: About
+    pageRef: /about
+    weight: 20
+
+params:
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  homeInfoParams:
+    Title: Hi, I'm Jacob
+    Content: Welcome to my portfolio. Here you'll find projects I've built and a bit about me.
+  socialIcons:
+  - name: github
+    url: https://github.com/jacobhuff-io
