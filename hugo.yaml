@@ -6,6 +6,11 @@ module:
   imports:
   - path: github.com/adityatelange/hugo-PaperMod
 
+markup:
+  highlight:
+    # Emit classes so assets/css/extended/eink.css can style code in ink only
+    noClasses: false
+
 caches:
   images:
     dir: :cacheDir/images
@@ -20,7 +25,9 @@ menu:
     weight: 20
 
 params:
-  defaultTheme: auto
+  # e-ink: paper only, no dark variant
+  defaultTheme: light
+  disableThemeToggle: true
   ShowReadingTime: true
   ShowBreadCrumbs: true
   ShowPostNavLinks: true

@@ -1,0 +1,284 @@
+/*
+ * e-ink theme for PaperMod, after https://eink-ui.com/docs/laws and the
+ * tokens in ~/.config/eink/tokens (COLOR=none). PaperMod appends every file
+ * in assets/css/extended/ after its own styles, so these rules win.
+ *
+ * Avoid grey: only ink and paper. Hierarchy is bold vs regular.
+ * Follow the lines: hair groups, line marks focus/selection, rule separates
+ * regions, heavy rule is the strongest boundary.
+ * Second cue: links are underlined, the current page is bold and underlined.
+ * No transitions.
+ */
+
+:root,
+:root[data-theme="dark"] {
+    --ink: #000000;
+    --paper: #ffffff;
+
+    --hair: 1px;
+    --line: 2px;
+    --rule: 3px;
+    --rule-heavy: 4px;
+
+    --r-xs: 4px;
+    --r-sm: 8px;
+    --r-md: 14px;
+
+    --font-ui: Lato, sans-serif;
+    --font-mono: "DejaVu Sans Mono", monospace;
+
+    /* PaperMod's variables, each resolved to ink or paper */
+    --radius: var(--r-sm);
+    --theme: var(--paper);
+    --entry: var(--paper);
+    --primary: var(--ink);
+    --secondary: var(--ink);
+    --tertiary: var(--ink);
+    --content: var(--ink);
+    --code-block-bg: var(--paper);
+    --code-bg: var(--paper);
+    --border: var(--ink);
+    color-scheme: light;
+}
+
+/* No transitions */
+*,
+*::before,
+*::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+}
+
+body {
+    font-family: var(--font-ui);
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: var(--font-mono);
+}
+
+::selection {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+:focus-visible {
+    outline: var(--line) solid var(--ink);
+    outline-offset: var(--line);
+}
+
+/* Regions: header and footer are separated from content by a rule */
+.header {
+    border-bottom: var(--rule) solid var(--ink);
+}
+
+.footer {
+    border-top: var(--rule) solid var(--ink);
+}
+
+.menu .active {
+    font-weight: 700;
+    border-bottom: var(--line) solid var(--ink);
+}
+
+.menu a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+}
+
+/* Secondary text stays ink; it is told apart by size, not by colour */
+.post-meta,
+.breadcrumbs,
+.entry-footer,
+.entry-hint,
+.post-meta a {
+    color: var(--ink);
+}
+
+/* Cards: a hairline groups; hover and press are the focus line, not a scale */
+.post-entry {
+    border: var(--hair) solid var(--ink);
+}
+
+.post-entry:hover {
+    outline: var(--line) solid var(--ink);
+    outline-offset: calc(-1 * var(--line));
+}
+
+.post-entry:active,
+.terms-tags a:active,
+.button:active,
+#searchbox input:focus {
+    transform: none;
+}
+
+.entry-content {
+    color: var(--ink);
+}
+
+/* Tags, pagination, TOC: hairline outlines; hover inverts to a fill */
+.terms-tags a,
+.post-tags a,
+.paginav,
+.share-buttons,
+details.toc {
+    color: var(--ink);
+    background: var(--paper);
+    border: var(--hair) solid var(--ink);
+}
+
+.terms-tags a:hover,
+.post-tags a:hover,
+.paginav a:hover {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+.paginav a:hover * {
+    color: var(--paper);
+}
+
+#searchbox input {
+    border: var(--hair) solid var(--ink);
+}
+
+#searchbox input:focus {
+    border-color: var(--ink);
+    outline: var(--line) solid var(--ink);
+    outline-offset: 0;
+}
+
+#searchResults .focus {
+    color: var(--paper);
+    background: var(--ink);
+    transform: none;
+}
+
+/* Content */
+.md-content blockquote {
+    border-inline-start: var(--rule) solid var(--ink);
+}
+
+.md-content hr {
+    height: var(--rule);
+    background: var(--ink);
+}
+
+.md-content table:not(.highlighttable) th,
+.md-content table:not(.highlighttable) td {
+    border-bottom: var(--hair) solid var(--ink);
+}
+
+.md-content table:not(.highlighttable) th {
+    border-bottom-width: var(--line);
+}
+
+.post-content code {
+    border: var(--hair) solid var(--ink);
+    border-radius: var(--r-xs);
+}
+
+.md-content .highlight:not(table),
+.md-content pre code {
+    color: var(--ink);
+    background: var(--paper) !important;
+}
+
+.md-content .highlight:not(table) {
+    border: var(--hair) solid var(--ink);
+}
+
+.md-content pre code,
+.md-content pre .highlight code {
+    border: 0;
+}
+
+.md-content pre:not(.highlight pre) {
+    border: var(--hair) solid var(--ink);
+    border-radius: var(--radius);
+}
+
+/* Always show controls: the copy button is visible, not revealed on hover */
+.copy-code {
+    display: block;
+    color: var(--paper);
+    background: var(--ink);
+    border-radius: var(--r-xs);
+}
+
+/* Syntax: told apart by bold and italic, never by colour (as eink.vim) */
+.chroma,
+.chroma * {
+    color: var(--ink) !important;
+    background: none !important;
+}
+
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp,
+.chroma .kr, .chroma .kt, .chroma .nt, .chroma .nb, .chroma .nf,
+.chroma .cp, .chroma .cpf, .chroma .gh, .chroma .gu, .chroma .gs {
+    font-weight: 700;
+}
+
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs,
+.chroma .ge {
+    font-style: italic;
+}
+
+.chroma .gi {
+    font-weight: 700;
+}
+
+.chroma .gd {
+    text-decoration: line-through;
+}
+
+.chroma .err {
+    color: var(--paper) !important;
+    background: var(--ink) !important;
+}
+
+.chroma .hl {
+    color: var(--paper) !important;
+    background: var(--ink) !important;
+}
+
+.chroma .lnt,
+.chroma .ln {
+    color: var(--ink) !important;
+}
+
+/* The back-to-top button covers content, so it is closed by a rule */
+.top-link {
+    background: var(--paper);
+    border: var(--rule) solid var(--ink);
+    filter: none;
+}
+
+.top-link svg {
+    filter: none;
+    fill: var(--ink);
+}
+
+.top-link:hover {
+    background: var(--ink);
+}
+
+.top-link:hover svg {
+    fill: var(--paper);
+}
+
+/* Profile-mode buttons (if enabled) follow the tag treatment */
+.button {
+    color: var(--ink);
+    background: var(--paper);
+    border: var(--hair) solid var(--ink);
+}
+
+.button:hover {
+    color: var(--paper);
+    background: var(--ink);
+}
